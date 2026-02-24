@@ -32,7 +32,7 @@ func main() {
 	defer pool.Close()
 
 	rdb := connectRedis(ctx, cfg.Redis.URL)
-	defer rdb.Close()
+	defer func() { _ = rdb.Close() }()
 
 	app := fiber.New()
 	app.Use(logging.Middleware(logger))
