@@ -26,6 +26,7 @@ func RunMigrations(databaseURL string) error {
 		return fmt.Errorf("creating migrator: %w", err)
 	}
 	defer m.Close()
+	
 
 	if err := m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
 		return fmt.Errorf("applying migrations: %w", err)
