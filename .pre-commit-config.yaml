@@ -1,9 +1,12 @@
 repos:
-  - repo: https://github.com/golangci/golangci-lint
-    rev: v2.10.1
-    
-    hooks:
-      - id: golangci-lint-fmt
-        entry: cd stash-backend && golangci-lint fmt
-      - id: golangci-lint-full
-        entry: cd stash-backend && golangci-lint run --fix
+- repo: local
+  hooks:
+    - id: golangci-lint-full
+      name: golangci-lint-full
+      description: Fast linters runner for Go. Runs on all files in the module. Use this hook if you use pre-commit in CI.
+      entry: bash -c 'cd stash-backend && golangci-lint run'
+      language: system
+      types: [go]
+      files: ^stash-backend/
+      require_serial: true
+      pass_filenames: false

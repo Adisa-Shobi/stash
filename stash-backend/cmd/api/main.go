@@ -13,6 +13,7 @@ import (
 	"github.com/redis/go-redis/v9"
 
 	"github.com/shobi/stash-backend/internal/config"
+	"github.com/shobi/stash-backend/internal/database"
 	"github.com/shobi/stash-backend/internal/logging"
 )
 
@@ -25,6 +26,15 @@ func main() {
 
 	logger := logging.New(cfg.Server.Environment, cfg.Server.LogLevel)
 	slog.SetDefault(logger)
+
+	if cfg.Database.AutoMigrate {
+		logger.Info("running database migrations")
+		if err := database.RunMigrations(cfg.Database.URL); err != nil {
+			logger.Error("failed to run migrations", "error", err)
+			os.Exit(1)
+		}
+		logger.Info("database migrations applied")
+	}
 
 	ctx := context.Background()
 

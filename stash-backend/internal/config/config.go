@@ -15,7 +15,8 @@ type ServerConfig struct {
 }
 
 type DatabaseConfig struct {
-	URL string `env:"DATABASE_URL,required"`
+	URL         string `env:"DATABASE_URL,required"`
+	AutoMigrate bool   `env:"DATABASE_AUTO_MIGRATE" envDefault:"true"`
 }
 
 type RedisConfig struct {
