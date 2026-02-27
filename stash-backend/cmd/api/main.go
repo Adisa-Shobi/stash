@@ -12,9 +12,9 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/redis/go-redis/v9"
 
-	"github.com/shobi/stash-backend/internal/config"
-	"github.com/shobi/stash-backend/internal/database"
-	"github.com/shobi/stash-backend/internal/logging"
+	"github.com/shobi/stash-backend/internal/core/config"
+	"github.com/shobi/stash-backend/internal/core/database"
+	"github.com/shobi/stash-backend/internal/core/logging"
 )
 
 func main() {
